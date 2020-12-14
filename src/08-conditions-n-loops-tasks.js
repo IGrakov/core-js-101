@@ -408,8 +408,8 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -425,8 +425,23 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(paths) {
+  let commonPath = '';
+  let minPathLength = Number.MAX_VALUE;
+  const pathsArr = paths.map((el) => el.split('/'));
+
+  for (let i = 0; i < pathsArr.length; i += 1) {
+    if (pathsArr[i].length < minPathLength) minPathLength = pathsArr[i].length;
+  }
+
+  for (let i = 0; i < minPathLength; i += 1) {
+    for (let j = 0; j < pathsArr.length; j += 1) {
+      if (pathsArr[0][i] !== pathsArr[j][i]) return commonPath;
+    }
+    commonPath += pathsArr[0][i];
+    commonPath += '/';
+  }
+  return commonPath;
 }
 
 
@@ -448,8 +463,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    res[i] = [];
+    for (let j = 0; j < m2[0].length; j += 1) {
+      let tempRes = 0;
+      for (let k = 0; k < m1[0].length; k += 1) {
+        tempRes += m1[i][k] * m2[k][j];
+      }
+      res[i][j] = tempRes;
+    }
+  }
+  return res;
 }
 
 
@@ -483,8 +509,24 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if ((position[0][0] === 'X' && position[0][1] === 'X' && position[0][2] === 'X')
+      || (position[1][0] === 'X' && position[1][1] === 'X' && position[1][2] === 'X')
+      || (position[2][0] === 'X' && position[2][1] === 'X' && position[2][2] === 'X')
+      || (position[0][0] === 'X' && position[1][0] === 'X' && position[2][0] === 'X')
+      || (position[0][1] === 'X' && position[1][1] === 'X' && position[2][1] === 'X')
+      || (position[0][2] === 'X' && position[1][2] === 'X' && position[2][2] === 'X')
+      || (position[0][0] === 'X' && position[1][1] === 'X' && position[2][2] === 'X')
+      || (position[0][2] === 'X' && position[1][1] === 'X' && position[2][0] === 'X')) return 'X';
+  if ((position[0][0] === '0' && position[0][1] === '0' && position[0][2] === '0')
+      || (position[1][0] === '0' && position[1][1] === '0' && position[1][2] === '0')
+      || (position[2][0] === '0' && position[2][1] === '0' && position[2][2] === '0')
+      || (position[0][0] === '0' && position[1][0] === '0' && position[2][0] === '0')
+      || (position[0][1] === '0' && position[1][1] === '0' && position[2][1] === '0')
+      || (position[0][2] === '0' && position[1][2] === '0' && position[2][2] === '0')
+      || (position[0][0] === '0' && position[1][1] === '0' && position[2][2] === '0')
+      || (position[0][2] === '0' && position[1][1] === '0' && position[2][0] === '0')) return '0';
+  return undefined;
 }
 
 
